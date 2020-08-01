@@ -1,17 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import Project from "./Project";
+import projectContext from "../../context/project/projectContext";
 
 const ListOfProjects = () => {
-  const projects = [
-    { name: "example1" },
-    { name: "example2" },
-    { name: "example3" },
-  ];
+  const { projects } = useContext(projectContext);
+  if (projects.length === 0) return null;
 
   return (
     <ul className="listado-proyectos">
-      {projects.map((item, i) => (
-        <Project key={i} {...item} />
+      {projects.map((item) => (
+        <Project key={item.id} {...item} />
       ))}
     </ul>
   );
