@@ -3,9 +3,17 @@ import projectContext from "../../context/project/projectContext";
 
 const NewProject = () => {
   const projectsContext = useContext(projectContext);
-  const { form, setForm } = projectsContext;
+  const {
+    form,
+    formError,
+    setForm,
+    addProject,
+    showErrorForm,
+  } = projectsContext;
 
-  const [project, setProject] = useState({});
+  const [project, setProject] = useState({
+    name: "",
+  });
 
   const handleChangeName = (event) => {
     setProject({ ...project, [event.target.name]: event.target.value });
@@ -13,6 +21,12 @@ const NewProject = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (project.name === "") {
+      showErrorForm();
+      return;
+    }
+    addProject(project);
+    setProject({ name: "" });
   };
 
   return (
@@ -32,6 +46,7 @@ const NewProject = () => {
             placeholder="Project"
             name="name"
             onChange={handleChangeName}
+            value={project.name}
           />
           <input
             type="submit"
@@ -39,6 +54,9 @@ const NewProject = () => {
             className="btn btn-primario btn-block"
           ></input>
         </form>
+      ) : null}
+      {formError ? (
+        <p className="mensaje error">The project´s name is requiered</p>
       ) : null}
     </>
   );
