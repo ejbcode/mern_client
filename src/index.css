@@ -262,21 +262,25 @@ aside {
 
 .tarea-enter,
 .proyecto-enter {
-  opacity: 0;
+  opacity: 0.1;
+  transform: translate(-200px, 0px);
 }
 .tarea-enter-active,
 .proyecto-enter-active {
   opacity: 1;
-  transition: opacity 200ms;
+  transform: translate(0, 0px);
+  transition: all 300ms ease-in;
 }
 .tarea-exit,
 .proyecto-exit {
   opacity: 1;
+  transform: translate(0, 0px);
 }
 .tarea-exit-active,
 .proyecto-exit-active {
-  opacity: 0;
-  transition: opacity 200ms;
+  opacity: 0.1;
+  transform: translate(-200px, 0px);
+  transition: all 300ms ease-in;
 }
 
 .form-usuario {

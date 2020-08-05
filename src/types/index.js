@@ -9,3 +9,5 @@ export const TASK_PROJECTS = "TASK_PROJECTS";
 export const ADD_TASK = "ADD_TASK";
 export const SHOW_ERROR_TASKFORM = "SHOW_ERROR_TASKFORM";
 export const DELETE_TASK = "DELETE_TASK";
+export const TASK_COMPLETE = "TASK_COMPLETE";
+export const CURRENT_TASK = "CURRENT_TASK";

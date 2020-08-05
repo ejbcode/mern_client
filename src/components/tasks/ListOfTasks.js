@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import Task from "./Task";
 import projectContext from "../../context/project/projectContext";
 import TaskContext from "../../context/tasks/TaskContext";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const ListOfTasks = () => {
   const { currentproject, deleteProject } = useContext(projectContext);
@@ -17,7 +18,13 @@ const ListOfTasks = () => {
             <p>No task asigment</p>
           </li>
         ) : (
-          tasksProjects.map((task, i) => <Task key={i} {...task} />)
+          <TransitionGroup>
+            {tasksProjects.map((task) => (
+              <CSSTransition key={task.id} timeout={400} classNames="tarea">
+                <Task task={task} />
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
         )}
       </ul>
       <button

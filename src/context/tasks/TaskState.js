@@ -2,24 +2,32 @@ import React, { useContext, useReducer } from "react";
 import TaskContext from "./TaskContext";
 import TaskReducer from "./TaskReducer";
 
-import { TASK_PROJECTS, ADD_TASK, SHOW_ERROR_TASKFORM } from "../../types";
+import {
+  TASK_PROJECTS,
+  ADD_TASK,
+  SHOW_ERROR_TASKFORM,
+  DELETE_TASK,
+  TASK_COMPLETE,
+  CURRENT_TASK,
+} from "../../types";
 
 const TaskState = (props) => {
   const initialState = {
     tasks: [
-      { name: "name1", complete: true, projectId: 1 },
-      { name: "name2", complete: false, projectId: 2 },
-      { name: "name3", complete: true, projectId: 3 },
-      { name: "name22", complete: false, projectId: 2 },
-      { name: "name2222", complete: true, projectId: 2 },
-      { name: "name111", complete: true, projectId: 1 },
-      { name: "name2", complete: false, projectId: 2 },
-      { name: "name33", complete: true, projectId: 3 },
-      { name: "name22", complete: false, projectId: 2 },
-      { name: "name222", complete: true, projectId: 2 },
+      { id: 0, name: "name1", complete: true, projectId: 1 },
+      { id: 1, name: "borrar2", complete: false, projectId: 2 },
+      { id: 2, name: "name3", complete: true, projectId: 3 },
+      { id: 3, name: "name22", complete: false, projectId: 2 },
+      { id: 4, name: "name2222", complete: true, projectId: 2 },
+      { id: 5, name: "name111", complete: true, projectId: 1 },
+      { id: 6, name: "name2", complete: false, projectId: 2 },
+      { id: 7, name: "name33", complete: true, projectId: 3 },
+      { id: 8, name: "name22", complete: false, projectId: 2 },
+      { id: 9, name: "name222", complete: true, projectId: 2 },
     ],
     tasksProjects: [],
     errorTaskForm: false,
+    currentTask: null,
   };
 
   const [state, dispatch] = useReducer(TaskReducer, initialState);
@@ -44,15 +52,40 @@ const TaskState = (props) => {
     });
   };
 
+  const deleteTask = (id) => {
+    dispatch({
+      type: DELETE_TASK,
+      payload: id,
+    });
+  };
+
+  const taskComplete = (task) => {
+    dispatch({
+      type: TASK_COMPLETE,
+      payload: task,
+    });
+  };
+
+  const getCurrentTask = (task) => {
+    dispatch({
+      type: CURRENT_TASK,
+      payload: task,
+    });
+  };
+
   return (
     <TaskContext.Provider
       value={{
         tasks: state.task,
         tasksProjects: state.tasksProjects,
         errorTaskForm: state.errorTaskForm,
+        currentTask: state.currentTask,
         getTaskProjects,
         addNewTask,
         showErrorTaskForm,
+        deleteTask,
+        taskComplete,
+        getCurrentTask,
       }}
     >
       {props.children}

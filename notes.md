@@ -110,5 +110,26 @@ and this file should be imported by de NameContext and the NameReducer. Somethin
 
 ## Steps to used
 
-1.- add a type in the type file.
+1.- add a _type_ in the type file.
 e.g., export const DELETE_TASK = "DELETE_TASK"
+
+2.- Import de _type_ in NameState
+e.g., import { SHOW_ERROR_TASKFORM, DELETE_TASK,} from "../../types";
+
+- Create a function with a dispacth and payload
+  e.g.,
+  `const deleteTask = ( id ) => { dispatch ({ type: DELETE_TASK, payload: id }) }`
+
+- Pass through the value in the NameContext.Provider
+
+  3.- Import de _type_ in NameReducer
+  e.g., import { SHOW_ERROR_TASKFORM, DELETE_TASK,} from "../../types";
+
+add the case Type in the switch
+e.g., `case DELETE_TASK return { ...state, ///and the action`
+
+4.- import the context whenever you need
+e.g.,`import TaskContext from "../../context/tasks/TaskContext";`
+and used ...
+
+`const { deleteTask, getTaskProjects } = useContext(TaskContext);`

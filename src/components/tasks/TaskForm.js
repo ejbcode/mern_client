@@ -6,6 +6,7 @@ const TaskForm = () => {
   const { currentproject } = useContext(projectContext);
   const {
     errorTaskForm,
+    currentTask,
     addNewTask,
     showErrorTaskForm,
     getTaskProjects,
