@@ -11,3 +11,4 @@ export const SHOW_ERROR_TASKFORM = "SHOW_ERROR_TASKFORM";
 export const DELETE_TASK = "DELETE_TASK";
 export const TASK_COMPLETE = "TASK_COMPLETE";
 export const CURRENT_TASK = "CURRENT_TASK";
+export const EDIT_TASK = "EDIT_TASK";

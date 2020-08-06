@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import projectContext from "../../context/project/projectContext";
 import TaskContext from "../../context/tasks/TaskContext";
 
@@ -10,7 +10,13 @@ const TaskForm = () => {
     addNewTask,
     showErrorTaskForm,
     getTaskProjects,
+    editTask,
   } = useContext(TaskContext);
+
+  useEffect(() => {
+    if (!currentTask) return;
+    setTaskName(currentTask.name);
+  }, [currentTask]);
 
   const [taskName, setTaskName] = useState("");
   if (!currentproject) return null;
@@ -30,7 +36,11 @@ const TaskForm = () => {
       projectId: currentproject[0].id,
     };
 
-    addNewTask(task);
+    if (!currentTask) {
+      addNewTask(task);
+    } else {
+      editTask(currentTask);
+    }
     getTaskProjects(currentproject[0].id);
     setTaskName("");
   };
@@ -51,7 +61,7 @@ const TaskForm = () => {
         <div className="contenedor-input">
           <input
             type="submit"
-            value="Add task"
+            value={currentTask ? "Edit" : "Add Task"}
             className="btn btn-primario btn-submit btn-block"
           />
         </div>

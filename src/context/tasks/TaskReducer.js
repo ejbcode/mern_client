@@ -5,6 +5,7 @@ import {
   DELETE_TASK,
   TASK_COMPLETE,
   CURRENT_TASK,
+  EDIT_TASK,
 } from "../../types";
 
 export default (state, action) => {
@@ -48,6 +49,15 @@ export default (state, action) => {
       return {
         ...state,
         currentTask: action.payload,
+      };
+
+    case EDIT_TASK:
+      console.log(action.payload);
+      return {
+        ...state,
+        tasks: state.tasks.map((item) =>
+          item.id === action.payload.id ? action.payload : item
+        ),
       };
 
     default:

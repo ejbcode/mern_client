@@ -22,6 +22,7 @@ const Task = ({ task }) => {
 
   const handleEditClick = () => {
     getCurrentTask(task);
+    console.log(task);
   };
 
   return (
