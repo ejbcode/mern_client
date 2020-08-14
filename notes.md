@@ -82,7 +82,7 @@ const NameState = (props) => {
 
   and Third
   return (
-    <NameContext.Provider value{{
+    <NameContext.Provider value={{
       constExample: state.constExample
     }}>
     {props.children}
@@ -126,7 +126,7 @@ e.g., import { SHOW_ERROR_TASKFORM, DELETE_TASK,} from "../../types";
   e.g., import { SHOW_ERROR_TASKFORM, DELETE_TASK,} from "../../types";
 
 add the case Type in the switch
-e.g., `case DELETE_TASK return { ...state, ///and the action`
+e.g., `case DELETE_TASK: return { ...state}, ///and the action`
 
 4.- import the context whenever you need
 e.g.,`import TaskContext from "../../context/tasks/TaskContext";`

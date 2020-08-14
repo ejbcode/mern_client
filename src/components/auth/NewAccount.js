@@ -1,17 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import AlertContext from "../../context/alerts/AlertsContext";
 
 const NewAccount = () => {
-  const [user, setUser] = useState({});
+  const { alert, showAlerts } = useContext(AlertContext);
+
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirm: "",
+  });
   const handleChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
+  const { name, email, password, confirm } = user;
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (
+      name.trim() === "" ||
+      email.trim() === "" ||
+      password.trim() === "" ||
+      confirm.trim() === ""
+    ) {
+      showAlerts("All field ara required", "alerta-error");
+    }
   };
 
   return (
     <div className="form-usuario">
+      {alert ? (
+        <div className={`alerta ${alert.category} `}>{alert.msg}</div>
+      ) : null}
       <div className="contenedor-form sombra-dark">
         <h1>Create an account</h1>
 

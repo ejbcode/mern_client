@@ -39,7 +39,7 @@ const TaskForm = () => {
     if (!currentTask) {
       addNewTask(task);
     } else {
-      editTask(currentTask);
+      editTask(task);
     }
     getTaskProjects(currentproject[0].id);
     setTaskName("");
