@@ -15,3 +15,10 @@ export const EDIT_TASK = "EDIT_TASK";
 
 export const SHOW_ALERTS = "SHOW_ALERTS";
 export const HIDE_ALERTS = "HIDE_ALERTS";
+
+export const SIGNUP = "SIGNUP";
+export const SIGNUP_ERROR = "SIGNUP_ERROR";
+export const GET_USER = "GET_USER";
+export const LOGIN = "LOGIN";
+export const LOGIN_ERROR = "LOGIN_ERROR";
+export const LOGOUT = "LOGOUT";

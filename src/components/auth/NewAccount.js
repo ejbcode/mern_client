@@ -24,7 +24,20 @@ const NewAccount = () => {
       password.trim() === "" ||
       confirm.trim() === ""
     ) {
-      showAlerts("All field ara required", "alerta-error");
+      return showAlerts("All field are required", "alerta-error");
+    }
+
+    if (password.length < 6) {
+      showAlerts("password must be at least 5 characters", "alerta-error");
+      return;
+    }
+
+    if (password !== confirm) {
+      showAlerts(
+        "Your password/confirm password fields do not match",
+        "alerta-error"
+      );
+      return;
     }
   };
 

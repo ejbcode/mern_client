@@ -6,19 +6,22 @@ import Projects from "./components/projects/Projects";
 import ProjectState from "./context/project/ProjectState";
 import TaskState from "./context/tasks/TaskState";
 import AlertsState from "./context/alerts/AlertsState";
+import AuthState from "./context/auth/AuthState";
 
 function App() {
   return (
     <ProjectState>
       <TaskState>
         <AlertsState>
-          <BrowserRouter>
-            <Switch>
-              <Route exact path="/" component={Login} />
-              <Route exact path="/new-account" component={NewAccount} />
-              <Route exact path="/projects" component={Projects} />
-            </Switch>
-          </BrowserRouter>
+          <AuthState>
+            <BrowserRouter>
+              <Switch>
+                <Route exact path="/" component={Login} />
+                <Route exact path="/new-account" component={NewAccount} />
+                <Route exact path="/projects" component={Projects} />
+              </Switch>
+            </BrowserRouter>
+          </AuthState>
         </AlertsState>
       </TaskState>
     </ProjectState>
