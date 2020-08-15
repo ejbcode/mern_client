@@ -1,6 +1,8 @@
 import React, { useContext, useReducer } from "react";
 import AuthContext from "./AuthContext";
 import AuthReducer from "./AuthReducer";
+import axiosClient from "../../config/axios";
+import tokenAuth from "../../config/tokenAuth";
 import {
   SIGNUP,
   SIGNUP_ERROR,
@@ -19,6 +21,46 @@ const AuthState = (props) => {
   };
   const [state, dispatch] = useReducer(AuthReducer, initialState);
 
+  const singupUser = async (dataUser) => {
+    try {
+      const response = await axiosClient.post("/api/users", dataUser);
+      dispatch({
+        type: SIGNUP,
+        payload: response.data,
+      });
+
+      userAuth();
+    } catch (error) {
+      const alert = {
+        msg: error.response.data.msg,
+        category: "alerta-error",
+      };
+      dispatch({
+        type: SIGNUP_ERROR,
+        payload: alert,
+      });
+    }
+  };
+
+  const userAuth = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      tokenAuth(token);
+    }
+    try {
+      const response = await axiosClient.get("/api/auth");
+      dispatch({
+        type: GET_USER,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: LOGIN_ERROR,
+      });
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -26,6 +68,7 @@ const AuthState = (props) => {
         authenticated: state.authenticated,
         user: state.user,
         message: state.message,
+        singupUser,
       }}
     >
       {props.children}

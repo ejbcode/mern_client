@@ -1,9 +1,21 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AlertContext from "../../context/alerts/AlertsContext";
+import AuthContext from "../../context/auth/AuthContext";
 
-const NewAccount = () => {
+const NewAccount = (props) => {
   const { alert, showAlerts } = useContext(AlertContext);
+  const { message, authenticated, singupUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (authenticated) {
+      props.history.push("/projects");
+    }
+
+    if (message) {
+      showAlerts(message.msg, message.category);
+    }
+  }, [authenticated, message, props.history, showAlerts]);
 
   const [user, setUser] = useState({
     name: "",
@@ -39,6 +51,8 @@ const NewAccount = () => {
       );
       return;
     }
+
+    singupUser({ name, email, password });
   };
 
   return (
