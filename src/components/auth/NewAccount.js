@@ -15,7 +15,7 @@ const NewAccount = (props) => {
     if (message) {
       showAlerts(message.msg, message.category);
     }
-  }, [authenticated, message, props.history, showAlerts]);
+  }, [authenticated, message, props.history]); //eslint-disable-line
 
   const [user, setUser] = useState({
     name: "",

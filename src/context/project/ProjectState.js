@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
-import { v4 as uuidv4 } from "uuid";
 import projectContext from "./projectContext";
 import projectReducer from "./projectReducer";
+import axiosClient from "../../config/axios";
 import {
   FORM_PROJECT,
   GET_PROJECTS,
@@ -40,12 +40,16 @@ const ProjectState = (props) => {
     });
   };
 
-  const addProject = (project) => {
-    project.id = uuidv4();
-    dispatch({
-      type: ADD_PROJECT,
-      payload: project,
-    });
+  const addProject = async (project) => {
+    try {
+      const result = await axiosClient.post("/api/projects", project);
+      dispatch({
+        type: ADD_PROJECT,
+        payload: result.data,
+      });
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 
   const showErrorForm = () => {

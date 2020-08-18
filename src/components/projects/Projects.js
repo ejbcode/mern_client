@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Sidebar from "../layout/Sidebar";
 import TopRow from "../layout/TopRow";
 import TaskForm from "../tasks/TaskForm";
 import ListOfTasks from "../tasks/ListOfTasks";
+import AuthContext from "../../context/auth/AuthContext";
 
 const Projects = () => {
+  const { userAuth } = useContext(AuthContext);
+
+  useEffect(() => {
+    userAuth();
+  }, []); //eslint-disable-line
+
   return (
     <div className="contenedor-app">
       <Sidebar />

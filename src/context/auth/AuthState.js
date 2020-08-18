@@ -51,7 +51,7 @@ const AuthState = (props) => {
       const response = await axiosClient.get("/api/auth");
       dispatch({
         type: GET_USER,
-        payload: response.data,
+        payload: response.data.user,
       });
     } catch (error) {
       console.log(error);
@@ -59,6 +59,33 @@ const AuthState = (props) => {
         type: LOGIN_ERROR,
       });
     }
+  };
+
+  const loginInit = async (dataUser) => {
+    try {
+      const response = await axiosClient.post("/api/auth", dataUser);
+      dispatch({
+        type: LOGIN,
+        payload: response.data,
+      });
+      userAuth();
+    } catch (error) {
+      console.log(error.response.data.msg);
+      const alert = {
+        msg: error.response.data.msg,
+        category: "alerta-error",
+      };
+      dispatch({
+        type: LOGIN_ERROR,
+        payload: alert,
+      });
+    }
+  };
+
+  const logOut = () => {
+    dispatch({
+      type: LOGOUT,
+    });
   };
 
   return (
@@ -69,6 +96,9 @@ const AuthState = (props) => {
         user: state.user,
         message: state.message,
         singupUser,
+        loginInit,
+        userAuth,
+        logOut,
       }}
     >
       {props.children}
